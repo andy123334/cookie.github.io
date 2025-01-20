@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        #timer {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 25px;
+            overflow: hidden;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        .progress-bar {
+            height: 30px;
+            width: 0;
+            background-color: #76c7c0;
+            transition: width 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+    <h1>薑餅人之塔出獄倒數</h1>
+    <div id="timer">剩餘天數: 0 天 00:00:00</div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <script>
+        //2025-1-26 解封
+        const targetDate = new Date("2025-01-22T23:00:00").getTime();
+        const progressBar = document.getElementById('progress-bar');
+        const timerDisplay = document.getElementById('timer');
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const totalDuration = targetDate - new Date("2025-01-15T23:00:00").getTime();
+            const timeRemaining = targetDate - now;
+            
+            if (timeRemaining <= 0) {
+                timerDisplay.textContent = "出獄啦";
+                progressBar.style.width = "100%";
+                clearInterval(interval);
+                return;
+            }
+
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            timerDisplay.textContent = `剩餘天數: ${days} 天 ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+            const progress = ((totalDuration - timeRemaining) / totalDuration) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        const interval = setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
