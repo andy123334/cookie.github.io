@@ -21,14 +21,14 @@
         }
         #timer {
             font-size: 2em;
-            margin: 20px 0;
+            margin: 10px 0;
         }
         .progress-container {
             width: 100%;
             background-color: #e0e0e0;
             border-radius: 25px;
             overflow: hidden;
-            margin: 20px auto;
+            margin: 10px auto;
             max-width: 600px;
         }
         .progress-bar {
@@ -41,11 +41,11 @@
 </head>
 <body>
     <h1>薑餅人之塔出獄倒數</h1>
-    <div id="timer"> 0 天 00:00:00</div>
     <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
     </div>
-
+    
+    <div id="timer"> 0 天 00:00:00</div>
     <script>
         // 定義 GMT+8 的目標時間
         const targetDate = new Date(Date.UTC(2025, 0, 22, 15, 0, 0)); // 2025-01-22 23:00:00 GMT+8
